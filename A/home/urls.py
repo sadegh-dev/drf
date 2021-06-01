@@ -6,4 +6,6 @@ app_name = 'home'
 urlpatterns = [
     path('one/', views.one, name='one'),
     path('two/', views.two, name='two'),
+    path('persons/', views.persons ),
+    path('person/<str:email>', views.person )
 ]
