@@ -10,3 +10,20 @@ def one(request):
         "name":"charlie"
     }
     return Response(data)
+
+
+
+@api_view(['GET','POST'])
+def two(request):
+    if request.method == 'POST' :
+        name = request.data['name']
+        dd = {
+            'name' :f'your name is {name}'
+        }
+        return Response(dd)
+    else :
+        dd ={
+            'name' : 'your name is guest'
+        }
+        return Response(dd)
+
