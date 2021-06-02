@@ -49,3 +49,25 @@ def person(request, email):
 
 
 
+@api_view(['POST'])
+def create_person(request):
+    info = PersonSerializer2(data=request.data)
+    if info.is_valid():
+        newPerson = Person(
+            name = info.validated_data['name'],
+            age = info.validated_data['age'],
+            email = info.validated_data['email'],
+        )
+        newPerson.save()
+        return Response({'message' : 'ok'})
+    else :
+        return Response(info.errors)
+
+
+
+
+
+
+
+
+
