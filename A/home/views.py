@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .serializers import PersonSerializer, PersonSerializer2
 from .models import Person
+from rest_framework import status
 
 
 #@api_view(['GET','POST'])
@@ -16,25 +17,26 @@ def one(request):
 
 
 @api_view(['GET','POST'])
-def two(request):
+def sayhello(request):
     if request.method == 'POST' :
         name = request.data['name']
         dd = {
-            'name' :f'your name is {name}'
+            'name' :f'hello and welcome {name}'
         }
         return Response(dd)
     else :
         dd ={
-            'name' : 'your name is guest'
+            'name' : 'your are guest'
         }
         return Response(dd)
+
 
 
 @api_view()
 def persons(reauest):
     pers = Person.objects.all()
     ser_data = PersonSerializer(pers, many = True)
-    return Response(ser_data.data)
+    return Response(ser_data.data, status = status.HTTP_200_OK )
 
 
 
@@ -43,26 +45,22 @@ def person(request, email):
     try :
         the_person = Person.objects.get(email=email)
     except:
-        return Response({'person':'does not exist'})
+        return Response({'person':'does not exist'}, status = status.HTTP_404_NOT_FOUND )
     ser_data = PersonSerializer2(the_person)
-    return Response(ser_data.data) 
-
+    return Response(ser_data.data,  status = status.HTTP_200_OK ) 
 
 
 @api_view(['POST'])
 def create_person(request):
-    info = PersonSerializer2(data=request.data)
+    info = PersonSerializer(data=request.data)
     if info.is_valid():
-        newPerson = Person(
-            name = info.validated_data['name'],
-            age = info.validated_data['age'],
-            email = info.validated_data['email'],
-        )
-        newPerson.save()
-        return Response({'message' : 'ok'})
+        info.save()
+        context = {
+            "message" : "OK"
+        }
+        return Response(context,status = status.HTTP_201_CREATED )
     else :
         return Response(info.errors)
-
 
 
 
