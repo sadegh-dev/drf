@@ -12,12 +12,14 @@ class PersonSerializer(serializers.Serializer):
         return value
 
 
+
+
 class PersonSerializer2(serializers.ModelSerializer):
+    car = serializers.StringRelatedField()
     class Meta :
         model = Person
-        fields = ('id','name','age','email')
-        """
+        fields = ('id','name','age','email', 'car')
+
         extra_kwargs = {
             'email' : { 'write_only' : True, },
         }
-        """
