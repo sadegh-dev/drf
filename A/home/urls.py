@@ -5,10 +5,10 @@ app_name = 'home'
 
 urlpatterns = [
     path('one/', views.one ),
-    path('sayhello/', views.sayhello ),
-    path('persons/', views.persons ),
-    path('person/<str:email>', views.person ),
-    path('create-person/', views.create_person ),
+    #path('sayhello/', views.sayhello ),
+    #path('persons/', views.persons ),
+    #path('persond/<str:email>', views.person ),
+    #path('create-person/', views.create_person ),
 ]
  
 

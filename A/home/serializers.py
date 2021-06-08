@@ -11,6 +11,8 @@ class PersonSerializer2(serializers.ModelSerializer):
     class Meta :
         model = Person
         fields = ('id','name','age','email')
+        """
         extra_kwargs = {
             'email' : { 'write_only' : True, },
         }
+        """
