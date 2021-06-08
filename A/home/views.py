@@ -1,8 +1,10 @@
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view , permission_classes
 from .serializers import PersonSerializer, PersonSerializer2
 from .models import Person
 from rest_framework import status
+from rest_framework.permissions import IsAdminUser
+
 
 
 #@api_view(['GET','POST'])
@@ -32,7 +34,7 @@ def sayhello(request):
 
 
 
-@api_view()
+@api_view(['GET','POST'])
 def persons(reauest):
     pers = Person.objects.all()
     ser_data = PersonSerializer(pers, many = True)
@@ -41,6 +43,7 @@ def persons(reauest):
 
 
 @api_view()
+@permission_classes([IsAdminUser,])
 def person(request, email):
     try :
         the_person = Person.objects.get(email=email)
@@ -61,11 +64,6 @@ def create_person(request):
         return Response(context,status = status.HTTP_201_CREATED )
     else :
         return Response(info.errors)
-
-
-
-
-
 
 
 
