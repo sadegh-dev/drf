@@ -1,10 +1,19 @@
 from rest_framework import viewsets
 from .models import Person
 from .serializers import PersonSerializer2
-from django.shortcuts import get_object_or_404
-from rest_framework.response import Response
+#from django.shortcuts import get_object_or_404
+#from rest_framework.response import Response
+#from rest_framework.permissions import IsAdminUser
 
 
+class PersonViewset(viewsets.ModelViewSet):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer2
+    #permission_classes = [IsAdminUser]
+
+
+
+"""
 class PersonViewset(viewsets.ViewSet):
     def list(self, request):
         queryset = Person.objects.all()
@@ -26,5 +35,7 @@ class PersonViewset(viewsets.ViewSet):
             return Response({'message':'OK'})
         else :
             return Response(serializer.errors)
+"""
+
 
 
