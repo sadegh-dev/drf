@@ -18,7 +18,7 @@ class Author(models.Model):
 
 class Book(models.Model):
     category =      models.ForeignKey(Category, on_delete=models.CASCADE, related_name='books')
-    authors =       models.ManyToManyField(Author)    
+    authors =       models.ManyToManyField(Author, related_name='tbooks')    
     name =          models.CharField(max_length=150)
     description =   models.TextField(max_length=1000, null=True, blank=True)
     pages =         models.PositiveIntegerField()
