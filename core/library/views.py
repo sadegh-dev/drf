@@ -32,12 +32,12 @@ def get_user_test(request):
 
 
 
-# List catogory
+# List Catogories
 
 @api_view(['GET',])
 def list_category(request):
-    books = Category.objects.all()
-    ser_data = serializers.CategorySerializer(books, many=True)
+    categories = Category.objects.all()
+    ser_data = serializers.CategorySerializer(categories, many=True)
     return Response(ser_data.data)
 
 
@@ -62,4 +62,27 @@ def list_books(request):
 
 
 
+# details Category
+
+@api_view(['GET',])
+def details_category(request, id):
+    try:
+        the_category = Category.objects.get(id = id)
+    except:
+        return Response({'category':'Not exists'})
+    ser_data = serializers.CategorySerializer(the_category)
+    return Response(ser_data.data)
+
+
+
+# details Authors [by Validation email]
+
+@api_view(['GET',])
+def details_author(request, email):
+    try:
+        the_author = Author.objects.get(email = email)
+    except:
+        return Response({'author':'Not exists'})
+    ser_data = serializers.AuthorSerializer(the_author)
+    return Response(ser_data.data)
 

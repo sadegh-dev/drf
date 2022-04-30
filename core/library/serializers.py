@@ -10,11 +10,13 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
 class AuthorSerializer(serializers.ModelSerializer):
     tbooks = serializers.StringRelatedField(many=True)
     class Meta:
         model = Author
-        fields = '__all__'
+        fields = ('name','email','tbooks','bio')
+
 
 
 class BookSerializer(serializers.ModelSerializer):
