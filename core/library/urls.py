@@ -8,7 +8,7 @@ urlpatterns = [
     path('test1/',views.test) ,
     path('test2/',views.get_user_test) ,
     # List
-    path('list-category/',views.list_category) ,
+    path('list-categories/',views.list_category) ,
     path('list-authors/',views.list_authors) ,
     path('list-books/',views.list_books) ,
     # Details
