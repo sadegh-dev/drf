@@ -75,7 +75,7 @@ def details_category(request, id):
 
 
 
-# details Authors [by Validation email]
+# Details Authors
 
 @api_view(['GET',])
 def details_author(request, email):
@@ -85,4 +85,33 @@ def details_author(request, email):
         return Response({'author':'Not exists'})
     ser_data = serializers.AuthorSerializer(the_author)
     return Response(ser_data.data)
+
+
+
+# Add Category
+
+@api_view(['POST',])
+def add_category(request):
+    info = serializers.AddCategorySerializer(data=request.data)
+    if info.is_valid():
+        info.save()
+        return Response({'message':'ok'})
+    else :
+        return Response(info.errors)
+
+
+
+# Delete Category
+
+@api_view(['DELETE',])
+def delete_category(request, id):
+    try:
+        cat = Category.objects.get(id = id)
+        cat.delete()
+        return Response({'category':'id deleted.'})
+    except:
+        return Response({'category':'Not exists'})
+
+
+
 

@@ -14,5 +14,9 @@ urlpatterns = [
     # Details
     path('category/<int:id>/',views.details_category) ,
     path('author/<str:email>/',views.details_author) ,
+    # Add
+    path('add-category/',views.add_category) ,
+    # Delete
+    path('delete-category/<int:id>/',views.delete_category) ,
 
 ]

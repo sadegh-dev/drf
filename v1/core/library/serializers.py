@@ -11,6 +11,13 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 
+class AddCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ('name',)
+
+
+
 class AuthorSerializer(serializers.ModelSerializer):
     tbooks = serializers.StringRelatedField(many=True)
     class Meta:
