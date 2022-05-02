@@ -74,7 +74,6 @@ def details_category(request, id):
     return Response(ser_data.data)
 
 
-
 # Details Authors
 
 @api_view(['GET',])
@@ -84,7 +83,10 @@ def details_author(request, email):
     except:
         return Response({'author':'Not exists'})
     ser_data = serializers.AuthorSerializer(the_author)
-    return Response(ser_data.data)
+    result = Response(ser_data.data)
+    print(result.data)
+    print(result.status_code)
+    return result
 
 
 
